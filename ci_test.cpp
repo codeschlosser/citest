@@ -2,7 +2,6 @@
 
 namespace {
 
-
 TEST(Test, Basic) {
   EXPECT_EQ(1, 1);
 }
