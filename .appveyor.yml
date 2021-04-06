@@ -13,11 +13,11 @@ branches:
 
 init:
 - sh: >
-    mkdir -p /private/var/tmp/bazel
+    mkdir -p /var/tmp/bazel
 
-    curl -L https://github.com/bazelbuild/bazelisk/releases/download/v1.7.5/bazelisk-darwin-amd64 -o /private/var/tmp/bazel/bazelisk
+    curl -L https://github.com/bazelbuild/bazelisk/releases/download/v1.7.5/bazelisk-darwin-amd64 -o /var/tmp/bazel/bazelisk
 
-    chmod +x /private/var/tmp/bazel/bazelisk
+    chmod +x /var/tmp/bazel/bazelisk
 
 - cmd: >
     mkdir %TEMP%\bazel
@@ -53,6 +53,7 @@ build_script:
 test_script:
 - sh: >-
     set -e
+
     /var/tmp/bazel/bazelisk test --disk_cache=bazel_disk_cache -c fastbuild --cxxopt -std=c++17 --build_python_zip -- //...:all
 
     /var/tmp/bazel/bazelisk test --disk_cache=bazel_disk_cache -c dbg --cxxopt -std=c++17 --build_python_zip -- //...:all
