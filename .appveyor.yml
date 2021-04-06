@@ -15,11 +15,14 @@ branches:
 init:
 - sh: >
     mkdir -p /private/var/tmp/bazel
+
     curl -L https://github.com/bazelbuild/bazelisk/releases/download/v1.7.5/bazelisk-darwin-amd64 -o /private/var/tmp/bazel/bazelisk
+
     chmod +x /private/var/tmp/bazel/bazelisk
 
 - cmd: >
     mkdir %TEMP%\bazel
+
     curl -L https://github.com/bazelbuild/bazelisk/releases/download/v1.7.5/bazelisk-windows-amd64.exe -o %TEMP%\bazel\bazelisk.exe
 
 cache:
