@@ -34,7 +34,7 @@ cache:
 - bazel_disk_cache
 
 build_script:
-- sh: >-
+- sh: >
     set -e
 
     /var/tmp/bazel/bazelisk build --disk_cache=bazel_disk_cache -c fastbuild --cxxopt -std=c++17 --build_python_zip -- //...:all
@@ -43,7 +43,7 @@ build_script:
 
     /var/tmp/bazel/bazelisk build --disk_cache=bazel_disk_cache -c opt --cxxopt -std=c++17 --build_python_zip -- //...:all
 
-- cmd: >-
+- cmd: >
     %TEMP%\bazel\bazelisk.exe build --disk_cache=bazel_disk_cache --cxxopt /std:c++17 --build_python_zip -c fastbuild //...:all
 
     if %errorlevel% neq 0 exit /b %errorlevel%
@@ -57,7 +57,7 @@ build_script:
     if %errorlevel% neq 0 exit /b %errorlevel%
 
 test_script:
-- sh: >-
+- sh: >
     set -e
 
     /var/tmp/bazel/bazelisk test --disk_cache=bazel_disk_cache -c fastbuild --cxxopt -std=c++17 --build_python_zip -- //...:all
@@ -66,7 +66,7 @@ test_script:
 
     /var/tmp/bazel/bazelisk test --disk_cache=bazel_disk_cache -c opt --cxxopt -std=c++17 --build_python_zip -- //...:all
 
-- cmd: >-
+- cmd: >
     %TEMP%\bazel\bazelisk.exe test --disk_cache=bazel_disk_cache --cxxopt /std:c++17 --build_python_zip -c fastbuild //...:all
 
     if %errorlevel% neq 0 exit /b %errorlevel%
