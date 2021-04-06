@@ -13,15 +13,13 @@ branches:
   - master
 
 init:
-- sh: >-
+- sh: >
   mkdir -p /private/var/tmp/bazel
-
   curl -L https://github.com/bazelbuild/bazelisk/releases/download/v1.7.5/bazelisk-darwin-amd64 -o /private/var/tmp/bazel/bazelisk
-
   chmod +x /private/var/tmp/bazel/bazelisk
-- cmd: >-
-  mkdir %TEMP%\bazel
 
+- cmd: >
+  mkdir %TEMP%\bazel
   curl -L https://github.com/bazelbuild/bazelisk/releases/download/v1.7.5/bazelisk-windows-amd64.exe -o %TEMP%\bazel\bazelisk.exe
 
 cache:
@@ -30,37 +28,29 @@ cache:
 build_script:
 - sh: >-
   set -e
-
   /var/tmp/bazel/bin/bazelisk build --disk_cache=bazel_disk_cache -c fastbuild --cxxopt -std=c++17 --build_python_zip -- //...:all
-
   /var/tmp/bazel/bin/bazelisk build --disk_cache=bazel_disk_cache -c dbg --cxxopt -std=c++17 --build_python_zip -- //...:all
-
   /var/tmp/bazel/bin/bazelisk build --disk_cache=bazel_disk_cache -c opt --cxxopt -std=c++17 --build_python_zip -- //...:all
+
 - cmd: >-
   %TEMP%\bazel\bazelisk.exe build --disk_cache=bazel_disk_cache --cxxopt /std:c++17 --build_python_zip -c fastbuild //...:all
   if %errorlevel% neq 0 exit /b %errorlevel%
-
   %TEMP%\bazel\bazelisk.exe build --disk_cache=bazel_disk_cache --cxxopt /std:c++17 --build_python_zip -c dbg //...:all
   if %errorlevel% neq 0 exit /b %errorlevel%
-
   %TEMP%\bazel\bazelisk.exe build --disk_cache=bazel_disk_cache --cxxopt /std:c++17 --build_python_zip -c opt //...:all
   if %errorlevel% neq 0 exit /b %errorlevel%
 
 test_script:
 - sh: >-
   set -e
-
   /var/tmp/bazel/bin/bazelisk test --disk_cache=bazel_disk_cache -c fastbuild --cxxopt -std=c++17 --build_python_zip -- //...:all
-
   /var/tmp/bazel/bin/bazelisk test --disk_cache=bazel_disk_cache -c dbg --cxxopt -std=c++17 --build_python_zip -- //...:all
-
   /var/tmp/bazel/bin/bazelisk test --disk_cache=bazel_disk_cache -c opt --cxxopt -std=c++17 --build_python_zip -- //...:all
+
 - cmd: >-
   %TEMP%\bazel\bazelisk.exe test --disk_cache=bazel_disk_cache --cxxopt /std:c++17 --build_python_zip -c fastbuild //...:all
   if %errorlevel% neq 0 exit /b %errorlevel%
-
   %TEMP%\bazel\bazelisk.exe test --disk_cache=bazel_disk_cache --cxxopt /std:c++17 --build_python_zip -c dbg //...:all
   if %errorlevel% neq 0 exit /b %errorlevel%
-
   %TEMP%\bazel\bazelisk.exe test --disk_cache=bazel_disk_cache --cxxopt /std:c++17 --build_python_zip -c opt //...:all
   if %errorlevel% neq 0 exit /b %errorlevel%
