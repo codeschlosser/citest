@@ -7,6 +7,9 @@ platform:
 
 steps:
 - name: build-and-test
+  when:
+    branch:
+    - master
   image: gcc
   commands:
   - mkdir -p bin && cd bin
