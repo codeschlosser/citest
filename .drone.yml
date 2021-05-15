@@ -8,11 +8,10 @@ steps:
 - name: build
   image: gcc
   commands:
+  - cat /etc/os-release
+  - cat /proc/cpuinfo
   - mkdir -p bin && cd bin
   - curl -L https://github.com/bazelbuild/bazel/releases/download/4.0.0/bazel-4.0.0-linux-arm64 -o bazel && chmod +x bazel
   - cd ..
   - ./bin/bazel build //...:all
-- name: test
-  image: gcc
-  commands:
   - ./bin/bazel test //...:all
