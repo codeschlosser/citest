@@ -42,7 +42,7 @@ jobs:
       run: bazel test --disk_cache="$env:USERPROFILE\AppData\Roaming\bazel_disk_cache" --cxxopt /std:c++17 //...:all
 
   build-macos:
-    runs-on: macos-11.0
+    runs-on: macos-10.15
     steps:
     - uses: actions/checkout@v2
     - name: bazel-disk-cache
