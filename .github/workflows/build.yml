@@ -16,7 +16,7 @@ jobs:
     - name: bazel-disk-cache
       uses: actions/cache@v2.0.0
       env:
-        cache-name: bazel-disk-cache-ubuntu
+        cache-name: citest-bazel-disk-cache-ubuntu
       with:
         path: ~/bazel_disk_cache
         key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('.github/workflows/CACHE_VERSION') }}
@@ -32,7 +32,7 @@ jobs:
     - name: bazel-disk-cache
       uses: actions/cache@v2.0.0
       env:
-        cache-name: bazel-disk-cache-windows
+        cache-name: citest-bazel-disk-cache-windows
       with:
         path: ~\AppData\Roaming\bazel_disk_cache
         key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('.github/workflows/CACHE_VERSION') }}
@@ -48,7 +48,7 @@ jobs:
     - name: bazel-disk-cache
       uses: actions/cache@v2.0.0
       env:
-        cache-name: bazel-disk-cache-macos
+        cache-name: citest-bazel-disk-cache-macos
       with:
         path: ~/bazel_disk_cache
         key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('.github/workflows/CACHE_VERSION') }}
