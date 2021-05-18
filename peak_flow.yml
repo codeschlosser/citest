@@ -1,0 +1,14 @@
+base_image: gcc
+before_script:
+  - mkdir -p /var/tmp/bazel
+  - curl -L https://github.com/bazelbuild/bazelisk/releases/download/v1.7.5/bazelisk-$(uname -s | awk '{print tolower($0)}')-amd64 -o /var/tmp/bazel/bazelisk
+  - chmod +x /var/tmp/bazel/bazelisk
+environment:
+  BAZEL_BIN: /var/tmp/bazel/bazelisk
+script:
+  - ${BAZEL_BIN} build -c fastbuild --cxxopt -std=c++17 --build_python_zip -- //...:all
+  - ${BAZEL_BIN} test -c fastbuild --cxxopt -std=c++17 --build_python_zip -- //...:all
+  - ${BAZEL_BIN} build -c dbg --cxxopt -std=c++17 --build_python_zip -- //...:all
+  - ${BAZEL_BIN} test -c dbg --cxxopt -std=c++17 --build_python_zip -- //...:all
+  - ${BAZEL_BIN} build -c opt --cxxopt -std=c++17 --build_python_zip -- //...:all
+  - ${BAZEL_BIN} test -c opt --cxxopt -std=c++17 --build_python_zip -- //...:all
