@@ -1,5 +1,3 @@
-base_image: gcc
-
 before_script:
   - mkdir -p /var/tmp/bazel
   - curl -L https://github.com/bazelbuild/bazelisk/releases/download/v1.8.1/bazelisk-$(uname -s | awk '{print tolower($0)}')-amd64 -o /var/tmp/bazel/bazelisk
